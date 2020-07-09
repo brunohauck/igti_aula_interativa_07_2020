@@ -1,0 +1,12 @@
+{
+  "name": "back_end",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "json-server": "^0.16.1"
+  },
+  "scripts": {
+    "server": "json-server --watch todos.json --port 3001"
+  }
+}
