@@ -8,7 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-export default function TodoListForm({ navigation }) {
+export default function TodoListForm({ handleChange }) {
   const [title, setTitle] = React.useState("");
   const [description, setDescription] = React.useState("");
 
@@ -25,6 +25,7 @@ export default function TodoListForm({ navigation }) {
       body: JSON.stringify(data),
     })
       .then(function(response) {
+        handleChange(id);
         return response.json();
       })
       .then(function(data) {
@@ -69,8 +70,6 @@ export default function TodoListForm({ navigation }) {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
   },
   form: {
     alignSelf: "stretch",

@@ -5,11 +5,15 @@ import TodoListForm from '../components/TodoForm';
 import TodoList from '../components/TodoList';
 import { ScrollView } from 'react-native-gesture-handler';
 export default function MainScreen({route, navigation}) {
+  const [flag, setFlag] = React.useState("");
+  const handleChange = (idFlagEdit) => {
+    setFlag(idFlagEdit)
+  }
   return (
     <View style={styles.container}>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <TodoListForm route={route} navigation={navigation} />
-          <TodoList route={route} navigation={navigation} />
+          <TodoListForm route={route} navigation={navigation} handleChange={handleChange} />
+          <TodoList route={route} navigation={navigation} flag={flag} handleChange={handleChange} />
       </ScrollView>
     </View>
   );

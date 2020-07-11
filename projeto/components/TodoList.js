@@ -11,7 +11,7 @@ import {
 import Constants from "expo-constants";
 import Item from "./Item";
 import { useIsFocused } from "@react-navigation/native";
-export default function TodoList({ route, navigation }) {
+export default function TodoList({ route, navigation, flag, handleChange }) {
   const [todos, setTodos] = React.useState([]);
   const isFocused = useIsFocused();
   React.useEffect(() => {
@@ -29,19 +29,20 @@ export default function TodoList({ route, navigation }) {
         setTodos(data);
       })
       .catch(console.log);
-  }, [isFocused ]);
+  }, [isFocused, flag]);
 
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
         data={todos}
         renderItem={({ item }) => (
-		  <Item 
-		  id={item.id} 
-		  title={item.title} 
-		  description={item.description}
-		  navigation={navigation}
-		  route={route} />
+          <Item
+            id={item.id}
+            title={item.title}
+            description={item.description}
+            navigation={navigation}
+            route={route}
+            handleChange={handleChange} />
         )}
         keyExtractor={(item) => item.id}
       />
