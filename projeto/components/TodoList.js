@@ -10,36 +10,10 @@ import {
 } from "react-native";
 import Constants from "expo-constants";
 import Item from "./Item";
-
-/*
- Item({ id, title, description, navigation }) {
-  return (
-    <View style={styles.item}>
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.title}>{description}</Text>
-      <Button
-        title="Edit"
-        onPress={() => {
-
-          navigation.navigate("Edit", {
-            id: id,
-			title: title,
-			description: description
-          });
-        }}
-      />
-      <Button
-        title="Delete"
-        onPress={() => {
-			console.log("entrou");
-        }}
-      />
-    </View>
-  );
-}*/
-
+import { useIsFocused } from "@react-navigation/native";
 export default function TodoList({ route, navigation }) {
   const [todos, setTodos] = React.useState([]);
+  const isFocused = useIsFocused();
   React.useEffect(() => {
     const obj = {
       method: "GET",
@@ -55,7 +29,7 @@ export default function TodoList({ route, navigation }) {
         setTodos(data);
       })
       .catch(console.log);
-  }, []);
+  }, [isFocused ]);
 
   return (
     <SafeAreaView style={styles.container}>
