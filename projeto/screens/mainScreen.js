@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 import TodoListForm from '../components/TodoForm';
 import TodoList from '../components/TodoList';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -12,6 +12,7 @@ export default function MainScreen({route, navigation}) {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+          <Image source={require('../img/igti.png')} />
           <TodoListForm route={route} navigation={navigation} handleChange={handleChange} />
           <TodoList route={route} navigation={navigation} flag={flag} handleChange={handleChange} />
       </ScrollView>

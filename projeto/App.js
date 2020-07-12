@@ -9,8 +9,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Main" component={MainScreen} />
-        <Stack.Screen name="Edit" component={EditScreen} />
+
+        <Stack.Screen name="Todo List" component={MainScreen} />
+        <Stack.Screen name="Edit Todo" component={EditScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
