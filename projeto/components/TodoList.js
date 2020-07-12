@@ -52,6 +52,5 @@ export default function TodoList({ route, navigation, flag, handleChange }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: Constants.statusBarHeight,
   },
 });
