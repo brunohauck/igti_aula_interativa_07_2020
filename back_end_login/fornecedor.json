@@ -1,0 +1,12 @@
+{
+    "fornecedor": [
+        {
+            "nome": "Nome do fornecedor",
+            "razaoSocial": "Razão social do fornecedor",
+            "cnpj": "000000000000000000000",
+            "endereco": "Endereço do fornecedor",
+            "cidade": "Cidade do fornecedor",
+            "id": 1
+          }
+    ]
+  }

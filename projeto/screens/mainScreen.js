@@ -11,9 +11,6 @@ export default function MainScreen({ route, navigation }) {
   };
   return (
     <View style={styles.container}>
-      <View>
-        <Image source={require("../assets/images/igti_new.png")} />
-      </View>
       <TodoListForm
         route={route}
         navigation={navigation}

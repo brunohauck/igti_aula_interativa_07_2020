@@ -7,31 +7,61 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  Image,
 } from "react-native";
-export default function TodoListForm({ handleChange }) {
+import { set } from "react-native-reanimated";
+
+export default function TodoListForm({
+  stateId,
+  stateTitle,
+  stateDescription,
+  handleChange,
+}) {
+  const [id, setId] = React.useState("");
   const [title, setTitle] = React.useState("");
   const [description, setDescription] = React.useState("");
+  React.useEffect(() => {
+    setId(stateId);
+    setTitle(stateTitle);
+    setDescription(stateDescription);
+  }, [stateId]);
+  console.log(stateTitle);
   async function handleSubmit(event) {
     event.preventDefault();
-    const id = function (s) {
-      return s.split("").reduce(function (a, b) {
-        a = (a << 5) - a + b.charCodeAt(0);
-        return a & a;
-      }, 0);
-    };
-    const data = { id, title, description };
-    await fetch("http://localhost:3001/todos", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    })
+    let gId;
+    let obj;
+    let url;
+    if (id === "") {
+      gId = function (s) {
+        return s.split("").reduce(function (a, b) {
+          a = (a << 5) - a + b.charCodeAt(0);
+          return a & a;
+        }, 0);
+      };
+      const data = { gId, title, description };
+      url = "http://localhost:3001/todos";
+      obj = {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      };
+    } else {
+      const data = { gId, title, description };
+      url = "http://localhost:3001/todos/" + id;
+      obj = {
+        method: "put",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      };
+    }
+
+    await fetch(url, obj)
       .then(function (response) {
-        handleChange(id);
         return response.json();
       })
       .then(function (data) {
         console.log(data);
+        handleChange(gId + "1332");
+        //userData = data;
       })
       .catch(console.log);
   }
@@ -42,15 +72,10 @@ export default function TodoListForm({ handleChange }) {
       style={style.container}
     >
       <View style={style.form}>
-        <Image
-          source={{
-            uri: "https://reactnative.dev/img/tiny_logo.png",
-          }}
-        />
-        <Text style={style.label}>Titulo</Text>
+        <Text style={style.label}>Title</Text>
         <TextInput
           style={style.input}
-          placeholder="Título"
+          placeholder="Razão Social"
           placeholderTextColor="#999"
           autoCapitalize="none"
           autoCorrect={false}
@@ -77,11 +102,13 @@ export default function TodoListForm({ handleChange }) {
 const style = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   form: {
     alignSelf: "stretch",
-    paddingHorizontal: 20,
-    marginTop: 5,
+    paddingHorizontal: 25,
+    marginTop: 15,
   },
   input: {
     borderWidth: 1,

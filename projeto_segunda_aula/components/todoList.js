@@ -1,3 +1,4 @@
+
 import React from "react";
 import {
   SafeAreaView,
@@ -9,10 +10,8 @@ import {
   Stack,
 } from "react-native";
 import Item from "./Item";
-import { useIsFocused } from "@react-navigation/native";
-export default function TodoList({ route, navigation, flag, handleChange }) {
+export default function TodoList({flag, handleChange, handleEdit}) {
   const [todos, setTodos] = React.useState([]);
-  const isFocused = useIsFocused();
   React.useEffect(() => {
     const obj = {
       method: "GET",
@@ -21,26 +20,16 @@ export default function TodoList({ route, navigation, flag, handleChange }) {
         "Content-Type": "application/json",
       },
     };
-    //global.api = 'http://192.168.254.5:4000';
-    //http://localhost:3001/todos
-    //http://192.168.0.5:3001/todos
-    console.log(global.api)
-    fetch('http://192.168.0.5:3001/todos', obj)
+    fetch("http://localhost:3001/todos", obj)
       .then((res) => res.json())
       .then((data) => {
-        //console.log(data);
-        { console.log('---------<1>---------')}
-        { console.log(todos)}
+        console.log(data);
         setTodos(data);
       })
       .catch(console.log);
-  }, [isFocused, flag]);
-
+  }, [flag]);
   return (
-  
     <SafeAreaView style={styles.container}>
-      { console.log('---------<2>---------')}
-        { console.log(todos)}
       <FlatList
         data={todos}
         renderItem={({ item }) => (
@@ -48,17 +37,28 @@ export default function TodoList({ route, navigation, flag, handleChange }) {
             id={item.id}
             title={item.title}
             description={item.description}
-            navigation={navigation}
-            route={route}
-            handleChange={handleChange} />
+            handleChange={handleChange}
+            handleEdit={handleEdit}
+          />
         )}
         keyExtractor={(item) => item.id}
       />
     </SafeAreaView>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 2,
+  },
+  item: {
+    backgroundColor: "#F2F3F4",
+    padding: 10,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  title: {
+    fontSize: 32,
   },
 });
