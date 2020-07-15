@@ -25,11 +25,11 @@ export default function TodoList({ route, navigation, flag, handleChange }) {
     //http://localhost:3001/todos
     //http://192.168.0.5:3001/todos
     console.log(global.api)
-    fetch('http://192.168.0.5:3001/todos', obj)
+    fetch('http://localhost:3001/todos', obj)
       .then((res) => res.json())
       .then((data) => {
         //console.log(data);
-        { console.log('---------<1>---------')}
+        { console.log('---------<Todos>---------')}
         { console.log(todos)}
         setTodos(data);
       })
@@ -39,8 +39,6 @@ export default function TodoList({ route, navigation, flag, handleChange }) {
   return (
   
     <SafeAreaView style={styles.container}>
-      { console.log('---------<2>---------')}
-        { console.log(todos)}
       <FlatList
         data={todos}
         renderItem={({ item }) => (

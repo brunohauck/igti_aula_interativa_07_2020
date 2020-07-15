@@ -14,14 +14,13 @@ export default function Item({ id, title, description, navigation, handleChange 
     <View style={styles.item}>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.title}>{description}</Text>
-
       <View style={styles.button}>
         <Button
           style={styles.button}
           title="Edit"
           onPress={() => {
             /* 1. Navigate to the Details route with params */
-            navigation.navigate("Edit", {
+            navigation.navigate("Edit Todo", {
               id: id,
               title: title,
               description: description
